@@ -1,0 +1,17 @@
+# {{ ansible_managed }}
+
+[Unit]
+Description=Trigger a speedtest
+
+[Timer]
+# TODO: validate with `systemd-analyze calendar $freq` 
+OnCalendar={{ speedtest_freq }}
+{% if speedtest_random_delay | int != 0 %}
+RandomizedDelaySec = {{ speedtest_random_delay | int }}
+{% endif %}
+FixedRandomDelay={{ speedtest_fixed_random_delay }}
+Persistent=false
+
+[Install]
+WantedBy=timers.target
+

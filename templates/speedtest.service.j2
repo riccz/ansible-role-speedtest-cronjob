@@ -1,0 +1,12 @@
+[Unit]
+Description=Run a speedtest
+Wants=network-online.target
+After=network-online.target
+
+[Service]
+Type=oneshot
+ExecStart=/usr/local/bin/speedtest_cronjob.bash
+TimeoutStartSec=5min
+Restart=no
+EnvironmentFile=/etc/default/speedtest
+

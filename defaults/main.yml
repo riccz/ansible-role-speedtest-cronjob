@@ -1,0 +1,10 @@
+---
+# Timer trigger frequency. 
+# This is a systemd calendar, so it can also take cronjob-like entries `*-*-07 00:00:00`
+speedtest_freq: hourly
+# If nonzero, randomly delay the trigger between 0 and this many seconds.
+speedtest_random_delay: 0
+# Use a fixed random delay (if enabled). 
+# The timer will always trigger with the same delay (dependent on the machine-id).
+speedtest_fixed_random_delay: false
+...
