@@ -31,14 +31,15 @@
     group: root
     mode: 0755
 
-# TODO: can build this from ansible (vault/lookup)
-- name: Check env vars file
-  file:
-    path: /etc/default/speedtest
+# Don't expose the password in the DBURI
+- name: Install env vars file
+  template:
+    src: speedtest_env.j2
+    dest: /etc/default/speedtest
     owner: root
     group: root
     mode: 0600
-    state: file
+    backup: true
 
 - name: Check systemd version vs vars
   assert:
