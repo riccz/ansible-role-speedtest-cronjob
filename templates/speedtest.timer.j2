@@ -9,9 +9,10 @@ OnCalendar={{ speedtest_freq }}
 {% if speedtest_random_delay | int != 0 %}
 RandomizedDelaySec = {{ speedtest_random_delay | int }}
 {% endif %}
+{% if systemd_version['major'] | int >= 247 %}
 FixedRandomDelay={{ speedtest_fixed_random_delay }}
+{% endif %}
 Persistent=false
 
 [Install]
 WantedBy=timers.target
-

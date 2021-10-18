@@ -1,0 +1,10 @@
+---
+- example: |+
+    systemd 247 (247.3-3ubuntu3.6)
+    +PAM +AUDIT +SELINUX +IMA +APPARMOR +SMACK +SYSVINIT +UTMP +LIBCRYPTSETUP +GCRYPT +GNUTLS +ACL +XZ +LZ4 +ZSTD +SECCOMP +BLKID +ELFUTILS +KMOD +IDN2 -IDN +PCRE2 default-hierarchy=hybrid
+  getval: >-
+    systemd (?P<major_version>\d+) \((?P<full_version>.+)\)
+  result:
+    major: "{{ major_version }}"
+    full: "{{ full_version }}"
+...

@@ -1,4 +1,12 @@
 ---
+- name: Get systemd version
+  ansible.utils.cli_parse:
+    command: systemd --version
+    parser:
+      name: ansible.netcommon.native
+      template_path: "{{ role_path }}/templates/systemd_version_cli_parse.yaml"
+    set_fact: systemd_version
+
 - name: Install gosu
   package:
     name: gosu
@@ -31,6 +39,13 @@
     group: root
     mode: 0600
     state: file
+
+- name: Check systemd version vs vars
+  assert:
+    that: systemd_version['major'] | int >= 247 or not speedtest_fixed_random_delay
+    fail_msg: >-
+      FixedRandomDelay is not supported by systemd before version 247.
+      Current version: {{ systemd_version['major'] }} ({{ systemd_version['full'] }})
 
 - name: Install systemd service
   template:
