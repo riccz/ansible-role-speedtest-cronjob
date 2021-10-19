@@ -55,6 +55,9 @@ Role Variables
 - `speedtest_freq` (default `hourly`): Timer trigger frequency. This is a [systemd calendar value][systemd-time-calendar], so it can also take cronjob-like entries, e.g. `*-*-07 12:15:00`.
 - `speedtest_random_delay`  (default 0): If nonzero, randomly delay the trigger between 0 and this many seconds.
 - `speedtest_fixed_random_delay` (default false): Use a fixed random delay (if enabled). The timer will always trigger with the same delay (dependent on the machine-id). This can only be used on systemd versions >= 247.
+- `speedtest_accept_license` (default false): The Speedtest CLI tool comes with its own license. To read it you can run `docker run --rm -it tianon/speedtest`. This role won't work if this variable is false.
+- `speedtest_accept_gdpr` (default false): See `speedtest_accept_license`.
+
 
 [systemd-time-calendar]: https://www.freedesktop.org/software/systemd/man/systemd.time.html#Calendar%20Events
 
@@ -67,6 +70,8 @@ Example Playbook
   roles:
     - role: speedtest-cronjob
       vars:
+        speedtest_accept_license: true
+        speedtest_accept_gdpr: true
         speedtest_dburi: "postgresql://user:pass@localhost:5432/dbname"
         # Every three hours, starting from 00:00:00, Italian timezone
         speedtest_freq: "*-*-* 00/3:00:00 Europe/Rome"

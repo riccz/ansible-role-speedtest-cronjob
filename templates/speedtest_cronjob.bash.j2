@@ -4,5 +4,8 @@
 set -euo pipefail
 
 docker run --rm --user nobody:nogroup -e HOME=/tmp/ --network=host \
-    tianon/speedtest:1.0 --accept-license --accept-gdpr -f json 2>/dev/null | \
+    tianon/speedtest:1.0 \
+    {% if speedtest_accept_license %} --accept-license {% endif %} \
+    {% if speedtest_accpet_gdpr %} --accept-gdpr {% endif %} \
+    -f json 2>/dev/null | \
 gosu nobody:nogroup /usr/local/bin/speedtest2pg.py 

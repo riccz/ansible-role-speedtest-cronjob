@@ -7,4 +7,6 @@ speedtest_random_delay: 0
 # Use a fixed random delay (if enabled). 
 # The timer will always trigger with the same delay (dependent on the machine-id).
 speedtest_fixed_random_delay: false
+speedtest_accept_license: false
+speedtest_accept_gdpr: false
 ...
